@@ -18,17 +18,24 @@ def decode_char(str)
   decoder[str]
 end
 
-def decode_str(str)
-  words_arr = str.split('  ')
-  phrase = ''
-  words_arr.each do |morse_word|
-    morse_word_arr = morse_word.split
-    morse_word_arr.each do |morse_char|
-      phrase += decode_char(morse_char)
-    end
-    phrase += ' '
+def decode_word(str)
+  word = ''
+  morse_word_arr = str.split
+  morse_word_arr.each do |morse_str|
+    word += decode_char(morse_str)
   end
-  print phrase
+  word
 end
 
-decode_str(' .-   -... --- -..-   ..-. ..- .-.. .-..   --- ..-.   .-. ..- -... .. . ...')
+def decode(str)
+  words_arr = str.split('   ')
+  phrase = ''
+  words_arr.each_with_index do |morse_word, index|
+    phrase += decode_word(morse_word)
+    phrase += ' ' if index != words_arr.length - 1
+  end
+  phrase
+end
+
+decode('-- -.--   -. .- -- .')
+decode(' .-   -... --- -..-   ..-. ..- .-.. .-..   --- ..-.   .-. ..- -... .. . ...')
