@@ -1,4 +1,4 @@
-decode_char = {
+$decode_char = {
   ".-" => "A",
   "-..." => "B",
   "-.-." => "C",
@@ -26,3 +26,19 @@ decode_char = {
   "-.--" => "Y",
   "--.." => "Z"
 }
+
+def decode_str(str)
+  words_arr = str.split("  ")
+  phrase = ""
+  words_arr.each do |morse_word|
+    morse_word_arr = morse_word.split(" ")
+    morse_word_arr.each do |morse_char|
+      phrase += $decode_char[morse_char]
+    end
+    phrase += " "
+  end
+  print phrase
+end
+
+
+decode_str("-- -.--   -. .- -- .")
